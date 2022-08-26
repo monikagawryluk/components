@@ -1,0 +1,251 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+.hidden {
+  display: none;
+}
+
+.centered {
+  text-align: center;
+}
+
+body {
+  font-family: 'Overpass', sans-serif;
+  font-size: 1.45rem;
+  font-weight: 400;
+  line-height: 1;
+  color: hsl(217, 12%, 63%);
+  background-color: hsl(216, 12%, 8%);
+  min-height: 100vh;
+  padding: 0 2rem;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-component {
+  max-width: 33rem;
+  min-height: 36rem;
+  background-color: hsl(213, 19%, 18%);
+  padding: 2rem;
+  border-radius: 1.5rem;
+  position: relative;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-icon {
+  background-color: hsl(213, 19%, 21%);
+  width: 4.3rem;
+  height: 4.3rem;
+  border-radius: 50%;
+  padding-left: 0.2rem;
+  margin-bottom: 2.5rem;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.rating-icon-inner {
+  width: 1.4rem;
+  height: 1.4rem;
+}
+
+.rating-heading {
+  font-size: 2.3rem;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  color: hsl(0, 0%, 100%);
+  margin-bottom: 1.5rem;
+}
+
+.rating-description {
+  line-height: 1.5;
+}
+
+.rating-numbers {
+  margin: 2.5rem 0;
+
+  display: flex;
+  justify-content: space-between;
+}
+
+.rating-number {
+  width: 4.3rem;
+  height: 4.3rem;
+  border-radius: 50%;
+  padding-top: 0.5rem;
+  transition: all 0.3s;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.not-selected-number {
+  background-color: hsl(213, 19%, 23%);
+}
+
+.selected-number {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(216, 12%, 54%);
+}
+
+.rating-number:hover {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(25, 97%, 53%);
+  cursor: pointer;
+}
+
+.rating-error {
+  font-size: 1.25rem;
+  color: hsla(30, 97%, 53%, 0.7);
+  white-space: nowrap;
+
+  position: absolute;
+  bottom: 0.4rem;
+  left: 50%;
+  transform: translate(-50%, 0);
+}
+
+.rating-btn-submit {
+  font-size: 1.3rem;
+  text-transform: uppercase;
+  font-weight: 600;
+  letter-spacing: 2.5px;
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(25, 97%, 53%);
+  box-shadow: 0 1rem 1rem rgba(0, 0, 0, 0.15);
+  width: 100%;
+  border: none;
+  padding: 1.5rem;
+  border-radius: 100rem;
+  transition: all 0.3s;
+}
+
+.rating-btn-submit:hover {
+  color: hsl(30, 86%, 53%);
+  background-color: hsl(0, 0%, 100%);
+  cursor: pointer;
+}
+
+.rating-img {
+  width: 50%;
+  margin-bottom: 2rem;
+}
+
+.rating-text-selected {
+  color: hsl(30, 90%, 53%);
+  background-color: hsl(213, 19%, 23%);
+  padding: 1.1rem 1.5rem 0.6rem;
+  margin-bottom: 3rem;
+  display: inline-block;
+  border-radius: 100rem;
+}
+
+/* ******************************** */
+/* MEDIA QUERIES */
+/* ******************************** */
+
+/* ABOVE 592px */
+@media (min-width: 37em) {
+  html {
+    font-size: 68.75%;
+  }
+
+  body {
+    font-size: 1.36rem;
+  }
+
+  .rating-component {
+    max-width: 35rem;
+    padding: 2.5rem;
+    border-radius: 2rem;
+  }
+
+  .rating-icon-inner {
+    width: 1.5rem;
+    height: 1.5rem;
+  }
+
+  .rating-heading {
+    font-size: 2.35rem;
+  }
+
+  .rating-description {
+    font-size: 1.36rem;
+  }
+
+  .rating-number {
+    font-size: 1.4rem;
+    width: 4.5rem;
+    height: 4.5rem;
+    padding-top: 0.4rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  .rating-btn-submit {
+    letter-spacing: 2px;
+    padding: 1.3rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2);
+  }
+
+  .rating-error {
+    bottom: 0.7rem;
+  }
+
+  .rating-img {
+    width: 45%;
+  }
+
+  .rating-text-selected {
+    letter-spacing: 0.5px;
+    padding: 0.92rem 1.7rem 0.5rem;
+    margin-bottom: 3.5rem;
+  }
+}
+
+/* ABOVE 912px */
+@media (min-width: 57em) {
+  .rating-component {
+    max-width: 37rem;
+    padding: 3.1rem;
+    border-radius: 2.5rem;
+  }
+
+  .rating-icon {
+    margin-bottom: 3rem;
+    box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+  }
+
+  .rating-heading {
+    font-size: 2.4rem;
+  }
+
+  .rating-number {
+    font-size: 1.45rem;
+    width: 4.7rem;
+    height: 4.7rem;
+  }
+
+  .rating-btn-submit {
+    font-size: 1.35rem;
+  }
+
+  .rating-error {
+    bottom: 0.8rem;
+  }
+}

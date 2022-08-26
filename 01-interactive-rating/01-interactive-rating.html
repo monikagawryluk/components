@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon-32x32.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Overpass:wght@400;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="01-interactive-rating.css" />
+    <script defer src="01-interactive-rating.js"></script>
+
+    <title>Interactive Rating Component</title>
+  </head>
+  <body>
+    <div class="rating-component">
+      <!-- Rating state -->
+      <div class="rating-state">
+        <div class="rating-icon">
+          <img class="rating-icon-inner" src="img/icon-star.svg" alt="" />
+        </div>
+        <h2 class="rating-heading">How did we do?</h2>
+        <p class="rating-description">
+          Please let us know how we did with your support request. All feedback
+          is appreciated to help us improve our offering!
+        </p>
+        <div class="rating-numbers">
+          <div class="rating-number not-selected-number" data-number="1">1</div>
+          <div class="rating-number not-selected-number" data-number="2">2</div>
+          <div class="rating-number not-selected-number" data-number="3">3</div>
+          <div class="rating-number not-selected-number" data-number="4">4</div>
+          <div class="rating-number not-selected-number" data-number="5">5</div>
+        </div>
+        <p class="rating-error hidden">Please choose your rating</p>
+        <button class="rating-btn-submit">Submit</button>
+      </div>
+
+      <!-- Thank you state -->
+      <div class="thank-you-state centered hidden">
+        <img class="rating-img" src="img/illustration-thank-you.svg" alt="" />
+        <p class="rating-text-selected">
+          You selected <span class="selected-rating">0</span> out of 5
+        </p>
+        <h2 class="rating-heading">Thank you!</h2>
+        <p class="rating-description">
+          We appreciate you taking the time to give a rating. If you ever need
+          more support, don’t hesitate to get in touch!
+        </p>
+      </div>
+    </div>
+  </body>
+</html>
