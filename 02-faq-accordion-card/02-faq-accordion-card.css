@@ -26,23 +26,22 @@ body {
 
 .faq-component {
   max-width: 33rem;
-  /* min-height: 50rem; */
   width: 100%;
   background-color: hsl(0, 0%, 100%);
-  padding: 0 2.5rem 5rem;
+  padding: 0 2.5rem 0;
   border-radius: 2.3rem;
-  margin-top: 15rem;
+  margin: 15rem 0 5rem;
+  box-shadow: 0 2.5rem 5rem rgba(0, 0, 0, 0.3);
 
-  display: flex;
-  flex-direction: column;
+  display: grid;
+  grid-template-rows: 3rem auto;
 }
 
 .img-box {
   position: relative;
-  height: 13.5rem;
 }
 
-.img-upper {
+.img-upper-mobile {
   width: 88%;
   position: absolute;
   top: 0;
@@ -51,7 +50,7 @@ body {
   z-index: 2;
 }
 
-.img-bottom {
+.img-bottom-mobile {
   width: 88%;
   position: absolute;
   top: 0;
@@ -60,20 +59,28 @@ body {
   z-index: 1;
 }
 
+.img-upper-desktop {
+  display: none;
+}
+
+.img-bottom-desktop {
+  display: none;
+}
+
 .text-box {
+  margin: 38% 0 5rem;
 }
 
 .heading {
-  font-size: 3rem;
-  font-weight: 800;
-  /* color: hsl(238, 29%, 16%); */
+  font-size: 3.1rem;
+  font-weight: 700;
+  letter-spacing: -0.5px;
   text-align: center;
   margin-bottom: 1.5rem;
 }
 
 .question-box {
   border-bottom: 1px solid hsl(240, 5%, 91%);
-  /* margin-bottom: 1.5rem; */
 
   display: grid;
   grid-template-columns: 1fr 3rem;
@@ -82,6 +89,7 @@ body {
 
 .question {
   font-size: 1.3rem;
+  line-height: 1.4;
   margin: 1.8rem 0;
   justify-self: start;
   cursor: pointer;
@@ -92,28 +100,25 @@ body {
 }
 
 .question-selected {
-  font-size: 1.3rem;
   font-weight: 600;
   color: hsl(238, 29%, 16%);
-  letter-spacing: -0.4px;
 }
 
 .btn-arrow {
   background-color: hsl(0, 0%, 100%);
-  padding: 0.1rem;
-  /* width: 2rem; */
-  /* height: 2rem; */
   border: none;
   justify-self: end;
   cursor: pointer;
-
-  /* display: flex;
-  align-items: center;
-  justify-content: center; */
+  border-radius: 0.2rem;
 }
 
-.icon {
-  width: 1.1rem;
+.btn-arrow:focus {
+  outline: none;
+  box-shadow: 0 0 0 0.5rem hsla(14, 88%, 65%, 0.4);
+}
+
+.btn-arrow:focus:not(:focus-visible) {
+  box-shadow: none;
 }
 
 .answer {
@@ -128,4 +133,132 @@ body {
 
 .rotated {
   transform: rotate(180deg);
+}
+
+/* ******************************** */
+/* MEDIA QUERIES */
+/* ******************************** */
+
+/* ABOVE 800px */
+@media (min-width: 50em) {
+  .faq-component {
+    max-width: 68rem;
+    min-height: 45rem;
+    margin-top: 10rem;
+    padding: 0;
+    position: relative;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 3rem;
+  }
+
+  .faq-component::after {
+    content: '';
+    background: url('img/illustration-box-desktop.svg') no-repeat;
+    background-size: 74%;
+    display: block;
+    width: 19.1rem;
+    height: 18.4rem;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-36%, 101%);
+    z-index: 9999;
+  }
+
+  .img-box {
+    overflow: hidden;
+  }
+
+  .img-upper-mobile {
+    display: none;
+  }
+
+  .img-bottom-mobile {
+    display: none;
+  }
+
+  .img-upper-desktop {
+    display: block;
+    width: 110%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-17.6%, 30%);
+    z-index: 2;
+  }
+
+  .img-bottom-desktop {
+    display: block;
+    width: 250%;
+    position: absolute;
+    top: 0;
+    left: 0;
+    transform: translate(-63.5%, -31%);
+    z-index: 1;
+  }
+
+  .text-box {
+    margin: 7rem 2.2rem 5rem 0;
+  }
+
+  .heading {
+    text-align: start;
+    margin-bottom: 2rem;
+  }
+
+  .question-box {
+    grid-template-columns: 1fr 3.5rem;
+  }
+
+  .question {
+    font-size: 1.4rem;
+  }
+
+  .btn-arrow {
+    justify-self: center;
+  }
+
+  .icon {
+    width: 1.1rem;
+  }
+
+  .answer {
+    font-size: 1.25rem;
+  }
+}
+
+/* ABOVE 1040px */
+@media (min-width: 65em) {
+  .faq-component {
+    max-width: 92rem;
+    min-height: 51rem;
+  }
+
+  .faq-component::after {
+    background-size: 100%;
+    transform: translate(-49%, 111%);
+  }
+
+  .img-upper-desktop {
+    width: 105%;
+    transform: translate(-17.6%, 20%);
+  }
+
+  .img-bottom-desktop {
+    width: 215%;
+    transform: translate(-59.5%, -31%);
+  }
+
+  .text-box {
+    margin-right: 10rem;
+  }
+
+  .heading {
+    font-size: 3.2rem;
+  }
+
+  .question {
+    font-size: 1.45rem;
+  }
 }

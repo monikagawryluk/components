@@ -1,5 +1,7 @@
 'use strict';
 
+//// Variables
+
 const btnSubmit = document.querySelector('.rating-btn-submit');
 const containerBtnsRating = document.querySelector('.rating-numbers');
 const btnsRating = document.querySelectorAll('.rating-number');
@@ -8,6 +10,8 @@ const cartStateThankYou = document.querySelector('.thank-you-state');
 const error = document.querySelector('.rating-error');
 
 let currentRating;
+
+//// Event Listeners
 
 // Submitting selected rating
 btnSubmit.addEventListener('click', function () {
