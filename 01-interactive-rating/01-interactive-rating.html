@@ -24,36 +24,36 @@
     <title>Interactive Rating Component</title>
   </head>
   <body>
-    <div class="rating-component">
+    <div class="container">
       <!-- Rating state -->
       <div class="rating-state">
-        <div class="rating-icon">
-          <img class="rating-icon-inner" src="img/icon-star.svg" alt="" />
+        <div class="icon">
+          <img class="icon-inner" src="img/icon-star.svg" alt="icon star" />
         </div>
-        <h2 class="rating-heading">How did we do?</h2>
-        <p class="rating-description">
+        <h2 class="heading">How did we do?</h2>
+        <p class="description">
           Please let us know how we did with your support request. All feedback
           is appreciated to help us improve our offering!
         </p>
-        <div class="rating-numbers">
-          <div class="rating-number not-selected-number" data-number="1">1</div>
-          <div class="rating-number not-selected-number" data-number="2">2</div>
-          <div class="rating-number not-selected-number" data-number="3">3</div>
-          <div class="rating-number not-selected-number" data-number="4">4</div>
-          <div class="rating-number not-selected-number" data-number="5">5</div>
+        <div class="numbers-container">
+          <div class="number not-selected-number" data-number="1">1</div>
+          <div class="number not-selected-number" data-number="2">2</div>
+          <div class="number not-selected-number" data-number="3">3</div>
+          <div class="number not-selected-number" data-number="4">4</div>
+          <div class="number not-selected-number" data-number="5">5</div>
         </div>
-        <p class="rating-error hidden">Please choose your rating</p>
-        <button class="rating-btn-submit">Submit</button>
+        <p class="error hidden">Please choose your rating</p>
+        <button class="btn-submit">Submit</button>
       </div>
 
       <!-- Thank you state -->
-      <div class="thank-you-state centered hidden">
-        <img class="rating-img" src="img/illustration-thank-you.svg" alt="" />
-        <p class="rating-text-selected">
+      <div class="thank-you-state centered state--hidden">
+        <img class="img" src="img/illustration-thank-you.svg" alt="" />
+        <p class="text-selected">
           You selected <span class="selected-rating">0</span> out of 5
         </p>
-        <h2 class="rating-heading">Thank you!</h2>
-        <p class="rating-description">
+        <h2 class="heading">Thank you!</h2>
+        <p class="description">
           We appreciate you taking the time to give a rating. If you ever need
           more support, don’t hesitate to get in touch!
         </p>

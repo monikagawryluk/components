@@ -2,12 +2,12 @@
 
 //// Variables
 
-const btnSubmit = document.querySelector('.rating-btn-submit');
-const containerBtnsRating = document.querySelector('.rating-numbers');
-const btnsRating = document.querySelectorAll('.rating-number');
+const btnSubmit = document.querySelector('.btn-submit');
+const containerBtnsRating = document.querySelector('.numbers-container');
+const btnsRating = document.querySelectorAll('.number');
 const cartStateRate = document.querySelector('.rating-state');
 const cartStateThankYou = document.querySelector('.thank-you-state');
-const error = document.querySelector('.rating-error');
+const error = document.querySelector('.error');
 
 let currentRating;
 
@@ -22,13 +22,13 @@ btnSubmit.addEventListener('click', function () {
 
   // Changing card from rating state to thank-you state
   document.querySelector('.selected-rating').textContent = currentRating;
-  cartStateRate.classList.toggle('hidden');
-  cartStateThankYou.classList.toggle('hidden');
+  cartStateRate.classList.toggle('state--hidden');
+  cartStateThankYou.classList.toggle('state--hidden');
 });
 
 // Selecting rating
 containerBtnsRating.addEventListener('click', function (e) {
-  if (!e.target.classList.contains('rating-number')) return;
+  if (!e.target.classList.contains('number')) return;
 
   btnsRating.forEach(btn => {
     btn.classList.add('not-selected-number');
