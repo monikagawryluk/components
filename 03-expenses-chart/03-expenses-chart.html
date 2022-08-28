@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <link
+      rel="icon"
+      type="image/png"
+      sizes="32x32"
+      href="img/favicon-32x32.png"
+    />
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="03-expenses-chart.css" />
+    <script defer src="03-expenses-chart.js"></script>
+
+    <title>Expenses Chart Component</title>
+  </head>
+  <body>
+    <div class="container">
+      <div class="top-box">
+        <div class="balance-box">
+          <p class="balance-text">My balance</p>
+          <p class="balance-value">$921.48</p>
+        </div>
+        <img class="icon" src="img/logo.svg" alt="logo icon" />
+      </div>
+      <div class="bottom-box">
+        <h2 class="title">Spending - Last 7 days</h2>
+        <div class="chart-container">
+          <!-- <div class="day-box">
+            <div class="bar-box">
+              <button class="bar">
+                <div class="bar-value">$17.45</div>
+              </button>
+            </div>
+            <p class="day-name">mon</p>
+          </div>
+
+          <div class="day-box">
+            <div class="bar-box">
+              <button class="bar">
+                <div class="bar-value">$34.91</div>
+              </button>
+            </div>
+            <p class="day-name">tue</p>
+          </div>
+
+          <div class="day-box">
+            <div class="bar-box">
+              <button class="bar bar--active">
+                <div class="bar-value">$52.36</div>
+              </button>
+            </div>
+            <p class="day-name">wed</p>
+          </div>
+
+          <div class="day-box">
+            <div class="bar-box">
+              <button class="bar">
+                <div class="bar-value">$31.07</div>
+              </button>
+            </div>
+            <p class="day-name">thu</p>
+          </div>
+
+          <div class="day-box">
+            <div class="bar-box">
+              <button class="bar">
+                <div class="bar-value">$23.39</div>
+              </button>
+            </div>
+            <p class="day-name">fri</p>
+          </div>
+
+          <div class="day-box">
+            <div class="bar-box">
+              <button class="bar">
+                <div class="bar-value">$43.28</div>
+              </button>
+            </div>
+            <p class="day-name">sat</p>
+          </div>
+
+          <div class="day-box">
+            <div class="bar-box">
+              <button class="bar">
+                <div class="bar-value">$25.48</div>
+              </button>
+            </div>
+            <p class="day-name">sun</p>
+          </div> -->
+        </div>
+        <div class="total-box">
+          <p class="total-text">Total this month</p>
+          <p class="total-value">$478.33</p>
+          <div class="percentage-box">
+            <p class="percentage-value">+2.4%</p>
+            <p class="percentage-text">from last month</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- <div class="faq-component">
+      <div class="img-box">
+        
+        <img
+          class="img-upper-mobile"
+          src="img/illustration-woman-online-mobile.svg"
+          alt="Woman searching for something on the internet"
+        />
+        <img class="img-bottom-mobile" src="img/bg-pattern-mobile.svg" alt="" />
+        <img
+          class="img-upper-desktop"
+          src="img/illustration-woman-online-desktop.svg"
+          alt="Woman searching for something on the internet"
+        />
+        <img
+          class="img-bottom-desktop"
+          src="img/bg-pattern-desktop.svg"
+          alt=""
+        />
+      </div>
+      <div class="text-box">
+        <h2 class="heading">FAQ</h2>
+        <div class="question-box">
+          <p class="question" data-question-nr="1">
+            How many team members can I invite?
+          </p>
+          <button class="btn-arrow" data-arrow-nr="1">
+            <img
+              class="icon"
+              src="img/icon-arrow-down.svg"
+              alt="Icon of an arrow"
+            />
+          </button>
+          <p class="answer hidden" data-answer-nr="1">
+            You can invite up to 2 additional users on the Free plan. There is
+            no limit on team members for the Premium plan.
+          </p>
+        </div>
+
+        <div class="question-box">
+          <p class="question" data-question-nr="2">
+            What is the maximum file upload size?
+          </p>
+          <button class="btn-arrow" data-arrow-nr="2">
+            <img
+              class="icon"
+              src="img/icon-arrow-down.svg"
+              alt="Icon of an arrow"
+            />
+          </button>
+          <p class="answer hidden" data-answer-nr="2">
+            No more than 2GB. All files in your account must fit your allotted
+            storage space.
+          </p>
+        </div>
+
+        <div class="question-box">
+          <p class="question" data-question-nr="3">
+            How do I reset my password?
+          </p>
+          <button class="btn-arrow" data-arrow-nr="3">
+            <img
+              class="icon"
+              src="img/icon-arrow-down.svg"
+              alt="Icon of an arrow"
+            />
+          </button>
+          <p class="answer hidden" data-answer-nr="3">
+            Click “Forgot password” from the login page or “Change password”
+            from your profile page. A reset link will be emailed to you.
+          </p>
+        </div>
+
+        <div class="question-box">
+          <p class="question" data-question-nr="4">
+            Can I cancel my subscription?
+          </p>
+          <button class="btn-arrow" data-arrow-nr="4">
+            <img
+              class="icon"
+              src="img/icon-arrow-down.svg"
+              alt="Icon of an arrow"
+            />
+          </button>
+          <p class="answer hidden" data-answer-nr="4">
+            Yes! Send us a message and we’ll process your request no questions
+            asked.
+          </p>
+        </div>
+
+        <div class="question-box">
+          <p class="question" data-question-nr="5">
+            Do you provide additional support?
+          </p>
+          <button class="btn-arrow" data-arrow-nr="5">
+            <img
+              class="icon"
+              src="img/icon-arrow-down.svg"
+              alt="Icon of an arrow"
+            />
+          </button>
+          <p class="answer hidden" data-answer-nr="5">
+            Chat and email support is available 24/7. Phone lines are open
+            during normal business hours.
+          </p>
+        </div>
+      </div>
+    </div> -->
+  </body>
+</html>
