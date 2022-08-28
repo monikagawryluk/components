@@ -69,22 +69,43 @@ body {
 
 .numbers-container {
   margin: 2.5rem 0;
+  list-style: none;
 
   display: flex;
   justify-content: space-between;
 }
 
 .number {
+  font-family: inherit;
+  color: inherit;
   width: 4.3rem;
   height: 4.3rem;
+  border: none;
   border-radius: 50%;
-  padding-top: 0.5rem;
-  transition: all 0.3s ease-out;
+  padding-top: 0.2rem;
+  transition-property: color, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
 
   display: flex;
   align-items: center;
   justify-content: center;
+}
+
+.number:hover {
+  color: hsl(0, 0%, 100%);
+  background-color: hsl(25, 97%, 53%);
+  cursor: pointer;
+}
+
+.number:focus {
+  outline: none;
+  box-shadow: 0 0 0.5rem 0.4rem hsl(30, 90%, 53%, 0.7);
+}
+
+.number:focus:not(:focus-visible) {
+  box-shadow: none;
 }
 
 .not-selected-number {
@@ -94,12 +115,6 @@ body {
 .selected-number {
   color: hsl(0, 0%, 100%);
   background-color: hsl(216, 12%, 54%);
-}
-
-.number:hover {
-  color: hsl(0, 0%, 100%);
-  background-color: hsl(25, 97%, 53%);
-  cursor: pointer;
 }
 
 .error {
@@ -138,13 +153,24 @@ body {
   border: none;
   padding: 1.5rem;
   border-radius: 100rem;
-  transition: all 0.3s;
+  transition-property: color, background-color;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
 }
 
 .btn-submit:hover {
   color: hsl(30, 86%, 53%);
   background-color: hsl(0, 0%, 100%);
   cursor: pointer;
+}
+
+.btn-submit:focus {
+  outline: none;
+  box-shadow: 0 0 0.4rem 0.4rem hsl(0, 0%, 100%, 0.5);
+}
+
+.btn-submit:focus:not(:focus-visible) {
+  box-shadow: none;
 }
 
 .state--hidden {
@@ -210,7 +236,7 @@ body {
     font-size: 1.4rem;
     width: 4.5rem;
     height: 4.5rem;
-    padding-top: 0.4rem;
+    padding-top: 0.3rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.15);
   }
 
@@ -221,7 +247,7 @@ body {
   }
 
   .error {
-    bottom: 0.7rem;
+    bottom: 0.5rem;
   }
 
   .img {
@@ -263,6 +289,6 @@ body {
   }
 
   .error {
-    bottom: 0.8rem;
+    bottom: 0.7rem;
   }
 }
