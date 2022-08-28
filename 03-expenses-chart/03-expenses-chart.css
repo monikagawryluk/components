@@ -32,7 +32,6 @@ body {
 
   display: flex;
   align-items: start; /* temporary */
-  /* align-items: center; */
   justify-content: center;
 }
 
@@ -40,12 +39,10 @@ body {
   max-width: 40rem;
   width: 100%;
   height: 53rem;
-  /* background-color: grey; */
 
   display: grid;
   grid-template-rows: 9.5rem 1fr;
   row-gap: 1.5rem;
-  /* align-items: center; */
 }
 
 .top-box {
@@ -82,7 +79,6 @@ body {
 
   display: grid;
   grid-template-rows: 4rem 1fr 5.5rem;
-  /* flex-direction: column; */
   row-gap: 2.5rem;
 }
 
@@ -111,6 +107,7 @@ body {
 
 .bar-box {
   align-self: stretch;
+  position: relative;
 
   display: flex;
 }
@@ -125,13 +122,26 @@ body {
   min-width: 5rem;
   padding: 0.65rem 0.65rem;
   border-radius: 0.4rem;
-  cursor: text;
   z-index: 1;
 
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition-property: opacity, pointer-events, visibility;
+  transition-duration: 0.3s;
+  transition-timing-function: ease-in;
+
   position: absolute;
-  top: 0;
+  bottom: 0;
   left: 50%;
-  transform: translate(-50%, -3.4rem);
+  transform: translate(-50%, 0);
+}
+
+.bar-value.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
+  transition-duration: 0s;
 }
 
 .bar {
@@ -142,8 +152,8 @@ body {
   cursor: pointer;
   display: block;
   align-self: end;
-  position: relative;
-  transition: all 0.3s ease-out;
+
+  transition: background-color 0.3s ease-out;
 }
 
 .bar:hover {
@@ -188,15 +198,4 @@ body {
   color: var(--dark-brown);
   font-weight: 700;
   margin-bottom: 0.4rem;
-}
-
-.percentage-text {
-}
-
-.hidden {
-  /* opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition: all 0.5s ease-in; */
-  display: none;
 }

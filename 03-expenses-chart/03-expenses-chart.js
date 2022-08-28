@@ -2,6 +2,8 @@
 
 const chartContainer = document.querySelector('.chart-container');
 
+let activeBarNr = 0;
+
 // Fetch JSON from file data.json
 
 const data = fetch('data.json')
@@ -21,10 +23,10 @@ const data = fetch('data.json')
             <button class="bar" data-bar-nr="${
               i + 1
             }" style="height: ${barHeight}%">
-              <div class="bar-value hidden" data-value-nr="${i + 1}" >$${
+            </button>
+            <div class="bar-value hidden" data-value-nr="${i + 1}";">$${
         item.amount
       }</div>
-            </button>
           </div>
           <p class="day-name">${item.day}</p>
         </div>
@@ -41,11 +43,10 @@ chartContainer.addEventListener('click', function (e) {
   if (!bar.classList.contains('bar')) return;
 
   const selectedBarNr = bar.dataset.barNr;
+  activeBarNr = selectedBarNr;
 
   const bars = document.querySelectorAll('.bar');
   const values = document.querySelectorAll('.bar-value');
-  console.log(bars);
-  console.log(values);
 
   bars.forEach(bar => {
     bar.classList.remove('bar--selected');
@@ -53,11 +54,59 @@ chartContainer.addEventListener('click', function (e) {
     if (bar.dataset.barNr !== selectedBarNr) return;
     bar.classList.add('bar--selected');
 
-    values.forEach(value => {
-      value.classList.add('hidden');
+    const barHeight = bar.clientHeight;
 
-      if (value.dataset.valueNr !== selectedBarNr) return;
+    values.forEach(value => {
+      const valueNr = value.dataset.valueNr;
+      value.classList.add('hidden');
+      value.style.transform = `translate(-50%, ${-barHeight / 10 - 0.7}rem)`;
+
+      if (valueNr !== selectedBarNr) return;
       value.classList.remove('hidden');
     });
+  });
+});
+
+chartContainer.addEventListener('mouseover', function (e) {
+  const bar = e.target;
+
+  if (!bar.classList.contains('bar')) return;
+
+  const selectedBarNr = bar.dataset.barNr;
+
+  const bars = document.querySelectorAll('.bar');
+  const values = document.querySelectorAll('.bar-value');
+
+  bars.forEach(bar => {
+    // bar.classList.remove('bar--selected');
+
+    if (bar.dataset.barNr !== selectedBarNr) return;
+    // bar.classList.add('bar--selected');
+
+    const barHeight = bar.clientHeight;
+
+    values.forEach(value => {
+      const valueNr = value.dataset.valueNr;
+
+      if (activeBarNr !== valueNr) value.classList.add('hidden');
+      if (valueNr !== activeBarNr)
+        value.style.transform = `translate(-50%, ${-barHeight / 10 - 0.7}rem)`;
+
+      if (valueNr !== selectedBarNr) return;
+      value.classList.remove('hidden');
+    });
+  });
+});
+
+chartContainer.addEventListener('mouseout', function (e) {
+  const bar = e.target;
+
+  if (!bar.classList.contains('bar')) return;
+
+  const values = document.querySelectorAll('.bar-value');
+
+  values.forEach(value => {
+    const valueNr = value.dataset.valueNr;
+    if (activeBarNr !== valueNr) value.classList.add('hidden');
   });
 });
