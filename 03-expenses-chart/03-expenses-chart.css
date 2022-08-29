@@ -2,7 +2,7 @@
   --soft-red: hsl(10, 79%, 65%);
   --soft-red-lighter: rgb(252, 168, 151);
   --cyan: hsl(186, 34%, 60%);
-  --cyan-lighter: rgb(165, 219, 228);
+  --cyan-lighter: rgb(172, 221, 231);
   --dark-brown: hsl(25, 47%, 15%);
   --medium-brown: hsl(28, 10%, 53%);
   --cream: hsl(27, 66%, 92%);
@@ -28,15 +28,14 @@ body {
   background-color: var(--cream);
   min-height: 100vh;
   padding: 0 1.6rem;
-  margin-top: 5rem; /* temporary */
 
   display: flex;
-  align-items: start; /* temporary */
+  align-items: center;
   justify-content: center;
 }
 
 .container {
-  max-width: 40rem;
+  max-width: 42rem;
   width: 100%;
   height: 53rem;
 
@@ -48,24 +47,22 @@ body {
 .top-box {
   background-color: var(--soft-red);
   border-radius: 1.2rem;
-  padding: 0 2.5rem;
+  padding: 0 2.5rem 0 2rem;
 
   display: flex;
   justify-content: space-between;
   align-items: center;
 }
 
-.balance-box {
-  color: var(--very-pale-orange);
-}
-
 .balance-text {
+  color: var(--cream);
   margin-bottom: 1rem;
 }
 
 .balance-value {
+  color: var(--very-pale-orange);
   font-size: 2.4rem;
-  font-weight: 700;
+  font-weight: 600;
 }
 
 .icon {
@@ -112,48 +109,16 @@ body {
   display: flex;
 }
 
-.bar-value {
-  font-family: 'DM Sans', sans-serif;
-  font-size: 1.25rem;
-  font-weight: 500;
-  letter-spacing: 0.5px;
-  color: var(--very-pale-orange);
-  background-color: var(--dark-brown);
-  min-width: 5rem;
-  padding: 0.65rem 0.65rem;
-  border-radius: 0.4rem;
-  z-index: 1;
-
-  opacity: 1;
-  pointer-events: auto;
-  visibility: visible;
-  transition-property: opacity, pointer-events, visibility;
-  transition-duration: 0.3s;
-  transition-timing-function: ease-in;
-
-  position: absolute;
-  bottom: 0;
-  left: 50%;
-  transform: translate(-50%, 0);
-}
-
-.bar-value.hidden {
-  opacity: 0;
-  pointer-events: none;
-  visibility: hidden;
-  transition-duration: 0s;
-}
-
 .bar {
   width: 100%;
+  height: 0;
   background-color: var(--soft-red);
   border-radius: 0.4rem;
   border: none;
   cursor: pointer;
   display: block;
   align-self: end;
-
-  transition: background-color 0.3s ease-out;
+  transition: background-color 0.3s ease-in, height 1s ease-out;
 }
 
 .bar:hover {
@@ -166,6 +131,35 @@ body {
 
 .bar--selected:hover {
   background-color: var(--cyan-lighter);
+}
+
+.bar-value {
+  font-size: 1.25rem;
+  font-weight: 500;
+  letter-spacing: 0.5px;
+  color: var(--very-pale-orange);
+  background-color: var(--dark-brown);
+  min-width: 5.5rem;
+  padding: 0.65rem 0.65rem;
+  border-radius: 0.4rem;
+  z-index: 1;
+
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  transform: translate(-50%, 0);
+
+  opacity: 1;
+  pointer-events: auto;
+  visibility: visible;
+  transition: opacity 0.3s ease-in, pointer-events 0.3s ease-in,
+    visibility 0.3s ease-in, transform 1s ease-out;
+}
+
+.bar-value.hidden {
+  opacity: 0;
+  pointer-events: none;
+  visibility: hidden;
 }
 
 .day-name {
@@ -198,4 +192,102 @@ body {
   color: var(--dark-brown);
   font-weight: 700;
   margin-bottom: 0.4rem;
+}
+
+/* ******************************** */
+/* MEDIA QUERIES */
+/* ******************************** */
+
+/* ABOVE 592px */
+@media (min-width: 40em) {
+  html {
+    font-size: 68.75%;
+  }
+
+  .top-box {
+    padding: 0 2.5rem;
+  }
+
+  .bottom-box {
+    padding: 3rem 2.5rem;
+  }
+
+  .bar-value {
+    font-size: 1.3rem;
+    padding: 0.8rem 0.65rem;
+  }
+}
+
+/* ABOVE 896px */
+@media (min-width: 56em) {
+  html {
+    font-size: 75%;
+  }
+
+  .top-box {
+    border-radius: 1.4rem;
+  }
+
+  .bottom-box {
+    border-radius: 1.4rem;
+  }
+
+  .total-value {
+    font-size: 3.3rem;
+    letter-spacing: -0.5px;
+  }
+}
+
+/* ABOVE 1200px */
+@media (min-width: 75em) {
+  html {
+    font-size: 77%;
+  }
+
+  .container {
+    max-width: 43rem;
+    grid-template-rows: 10rem 1fr;
+    row-gap: 1.8rem;
+  }
+
+  .top-box {
+    border-radius: 1.6rem;
+    padding: 0 3rem;
+  }
+
+  .balance-value,
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .bottom-box {
+    border-radius: 1.6rem;
+    padding: 3rem 3rem 4rem;
+  }
+
+  .title {
+    font-size: 2.6rem;
+  }
+
+  .chart-container {
+    border-bottom: 3px solid var(--cream);
+    gap: 1.3rem;
+  }
+
+  .bar-value {
+    letter-spacing: 1px;
+    min-width: 5.7rem;
+    padding: 0.85rem 0.7rem;
+
+    /* bottom: 0; */
+    /* transform: translate(-50%, 0); */
+  }
+
+  .total-value {
+    font-size: 3.7rem;
+  }
+
+  .percentage-value {
+    margin-bottom: 0.5rem;
+  }
 }

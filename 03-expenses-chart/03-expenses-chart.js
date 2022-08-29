@@ -1,112 +1,135 @@
 'use strict';
 
+//// Variables
+
 const chartContainer = document.querySelector('.chart-container');
 
-let activeBarNr = 0;
+const state = {
+  chartData: [],
+  barsHeight: [],
+  activeBarNr: 0,
+};
 
-// Fetch JSON from file data.json
+//// Functions
 
-const data = fetch('data.json')
-  .then(response => response.json())
-  .then(data => {
-    const amountsArray = data.map(i => i.amount);
-    console.log(amountsArray);
-    const maxAmount = Math.max(...amountsArray);
-    console.log(maxAmount);
+const createDataArray = function (data) {
+  data.forEach(el => {
+    const barData = {
+      day: el.day,
+      value: el.amount,
+    };
+    state.chartData.push(barData);
+  });
 
-    console.log(data);
-    data.forEach((item, i) => {
-      const barHeight = (item.amount * 100) / maxAmount;
-      const markup = `
-        <div class="day-box">
-          <div class="bar-box">
-            <button class="bar" data-bar-nr="${
-              i + 1
-            }" style="height: ${barHeight}%">
-            </button>
-            <div class="bar-value hidden" data-value-nr="${i + 1}";">$${
-        item.amount
-      }</div>
-          </div>
-          <p class="day-name">${item.day}</p>
+  console.log(state.chartData);
+};
+
+const createBarsHeightsArray = function (data) {
+  const valuesArray = data.map(el => el.value);
+  const maxValue = Math.max(...valuesArray);
+
+  data.forEach(el => {
+    const barHeight = (el.value * 100) / maxValue; // in % of highest bar
+    state.barsHeight.push(barHeight);
+  });
+};
+
+const createChartMarkup = function (data) {
+  data.forEach((el, i) => {
+    const markup = `
+      <div class="day-box">
+        <div class="bar-box">
+          <button class="bar" data-bar-nr="${i + 1}" >
+          </button>
+          <p class="bar-value hidden" data-value-nr="${i + 1}">$${el.value}</p>
         </div>
-      `;
+        <p class="day-name">${el.day}</p>
+      </div>
+    `;
 
-      chartContainer.insertAdjacentHTML('beforeend', markup);
-    });
-  })
-  .catch(err => console.log(err));
+    chartContainer.insertAdjacentHTML('beforeend', markup);
+  });
+};
 
+const changeBarsHeightProperty = function () {
+  const bars = document.querySelectorAll('.bar');
+
+  bars.forEach((bar, i) => {
+    bar.style.height = `${state.barsHeight[i]}%`;
+  });
+};
+
+const changeValuesLocation = function () {
+  const values = document.querySelectorAll('.bar-value');
+  const barContainerEl = document.querySelector('.bar-box');
+  const barContainerHeight = barContainerEl.clientHeight / 10; // in rem
+
+  values.forEach((value, i) => {
+    value.style.transform = `translate(-50%, ${
+      (-state.barsHeight[i] * barContainerHeight) / 100 - 0.7
+    }rem)`;
+  });
+};
+
+const init = async function () {
+  try {
+    // Get chart data from file data.json
+    const res = await fetch('data.json');
+    const data = await res.json();
+
+    // Add chart data to state
+    createDataArray(data);
+
+    // Create chart markup
+    createChartMarkup(state.chartData);
+
+    // Create array with bars' heights
+    createBarsHeightsArray(state.chartData);
+
+    // Create bars' height animation
+    window.setTimeout(changeBarsHeightProperty, 200);
+
+    // Move bars' value tags to the top of bars
+    window.setTimeout(changeValuesLocation, 200);
+  } catch (err) {
+    console.log(err);
+  }
+};
+init();
+
+const showOrHideValueTag = function (e) {
+  if (!e.target.classList.contains('bar')) return;
+
+  const selectedBarNr = e.target.dataset.barNr;
+  if (selectedBarNr === state.activeBarNr) return;
+
+  const values = document.querySelectorAll('.bar-value');
+  values[selectedBarNr - 1].classList.toggle('hidden');
+};
+
+//// Event Listeners
+
+// Clik on bar -> Change bar color
 chartContainer.addEventListener('click', function (e) {
-  const bar = e.target;
+  if (!e.target.classList.contains('bar')) return;
 
-  if (!bar.classList.contains('bar')) return;
-
-  const selectedBarNr = bar.dataset.barNr;
-  activeBarNr = selectedBarNr;
-
+  const selectedBarNr = e.target.dataset.barNr;
+  state.activeBarNr = selectedBarNr;
   const bars = document.querySelectorAll('.bar');
   const values = document.querySelectorAll('.bar-value');
 
-  bars.forEach(bar => {
+  bars.forEach((bar, i) => {
     bar.classList.remove('bar--selected');
-
-    if (bar.dataset.barNr !== selectedBarNr) return;
-    bar.classList.add('bar--selected');
-
-    const barHeight = bar.clientHeight;
-
-    values.forEach(value => {
-      const valueNr = value.dataset.valueNr;
-      value.classList.add('hidden');
-      value.style.transform = `translate(-50%, ${-barHeight / 10 - 0.7}rem)`;
-
-      if (valueNr !== selectedBarNr) return;
-      value.classList.remove('hidden');
-    });
+    values[i].classList.add('hidden');
   });
+
+  bars[selectedBarNr - 1].classList.add('bar--selected');
+  values[selectedBarNr - 1].classList.remove('hidden');
 });
 
-chartContainer.addEventListener('mouseover', function (e) {
-  const bar = e.target;
-
-  if (!bar.classList.contains('bar')) return;
-
-  const selectedBarNr = bar.dataset.barNr;
-
-  const bars = document.querySelectorAll('.bar');
-  const values = document.querySelectorAll('.bar-value');
-
-  bars.forEach(bar => {
-    // bar.classList.remove('bar--selected');
-
-    if (bar.dataset.barNr !== selectedBarNr) return;
-    // bar.classList.add('bar--selected');
-
-    const barHeight = bar.clientHeight;
-
-    values.forEach(value => {
-      const valueNr = value.dataset.valueNr;
-
-      if (activeBarNr !== valueNr) value.classList.add('hidden');
-      if (valueNr !== activeBarNr)
-        value.style.transform = `translate(-50%, ${-barHeight / 10 - 0.7}rem)`;
-
-      if (valueNr !== selectedBarNr) return;
-      value.classList.remove('hidden');
-    });
-  });
-});
-
-chartContainer.addEventListener('mouseout', function (e) {
-  const bar = e.target;
-
-  if (!bar.classList.contains('bar')) return;
-
-  const values = document.querySelectorAll('.bar-value');
-
-  values.forEach(value => {
-    const valueNr = value.dataset.valueNr;
-    if (activeBarNr !== valueNr) value.classList.add('hidden');
-  });
-});
+// Move mouse over bar or out of bar -> Show or hide value tag
+['mouseover', 'mouseout'].forEach(ev =>
+  chartContainer.addEventListener(ev, function (e) {
+    showOrHideValueTag(e);
+  })
+);
