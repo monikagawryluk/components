@@ -2,13 +2,13 @@
 
 //// Variables
 
-const chartContainer = document.querySelector('.chart-container');
-
 const state = {
   chartData: [],
   barsHeight: [],
   activeBarNr: 0,
 };
+
+const chartContainer = document.querySelector('.chart-container');
 
 //// Functions
 
@@ -24,7 +24,7 @@ const createDataArray = function (data) {
   console.log(state.chartData);
 };
 
-const createBarsHeightsArray = function (data) {
+const createBarsHeightArray = function (data) {
   const valuesArray = data.map(el => el.value);
   const maxValue = Math.max(...valuesArray);
 
@@ -59,16 +59,27 @@ const changeBarsHeightProperty = function () {
   });
 };
 
-const changeValuesLocation = function () {
+const changeValueTagsLocation = function () {
   const values = document.querySelectorAll('.bar-value');
   const barContainerEl = document.querySelector('.bar-box');
   const barContainerHeight = barContainerEl.clientHeight / 10; // in rem
 
   values.forEach((value, i) => {
     value.style.transform = `translate(-50%, ${
-      (-state.barsHeight[i] * barContainerHeight) / 100 - 0.7
+      (-state.barsHeight[i] * barContainerHeight) / 100 - 0.5
     }rem)`;
   });
+};
+
+const createErrorMessage = function () {
+  chartContainer.style.flexDirection = 'column';
+  chartContainer.innerHTML = '';
+
+  const markup = `
+      <p class="error">Sorry, something went wrong. Chart data couldn't be loaded.</p>
+      <p class="error">Please try again.</p>
+    `;
+  chartContainer.insertAdjacentHTML('beforeend', markup);
 };
 
 const init = async function () {
@@ -84,28 +95,19 @@ const init = async function () {
     createChartMarkup(state.chartData);
 
     // Create array with bars' heights
-    createBarsHeightsArray(state.chartData);
+    createBarsHeightArray(state.chartData);
 
     // Create bars' height animation
     window.setTimeout(changeBarsHeightProperty, 200);
 
     // Move bars' value tags to the top of bars
-    window.setTimeout(changeValuesLocation, 200);
+    window.setTimeout(changeValueTagsLocation, 200);
   } catch (err) {
     console.log(err);
+    createErrorMessage();
   }
 };
 init();
-
-const showOrHideValueTag = function (e) {
-  if (!e.target.classList.contains('bar')) return;
-
-  const selectedBarNr = e.target.dataset.barNr;
-  if (selectedBarNr === state.activeBarNr) return;
-
-  const values = document.querySelectorAll('.bar-value');
-  values[selectedBarNr - 1].classList.toggle('hidden');
-};
 
 //// Event Listeners
 
@@ -130,6 +132,12 @@ chartContainer.addEventListener('click', function (e) {
 // Move mouse over bar or out of bar -> Show or hide value tag
 ['mouseover', 'mouseout'].forEach(ev =>
   chartContainer.addEventListener(ev, function (e) {
-    showOrHideValueTag(e);
+    if (!e.target.classList.contains('bar')) return;
+
+    const selectedBarNr = e.target.dataset.barNr;
+    if (selectedBarNr === state.activeBarNr) return;
+
+    const values = document.querySelectorAll('.bar-value');
+    values[selectedBarNr - 1].classList.toggle('hidden');
   })
 );
