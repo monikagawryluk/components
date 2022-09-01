@@ -51,7 +51,7 @@ const createChartMarkup = function (data) {
   });
 };
 
-const changeBarsHeightProperty = function () {
+const renderBars = function () {
   const bars = document.querySelectorAll('.bar');
 
   bars.forEach((bar, i) => {
@@ -59,16 +59,28 @@ const changeBarsHeightProperty = function () {
   });
 };
 
-const changeValueTagsLocation = function () {
+const moveValueTags = function () {
   const values = document.querySelectorAll('.bar-value');
   const barContainerEl = document.querySelector('.bar-box');
-  const barContainerHeight = barContainerEl.clientHeight / 10; // in rem
 
-  values.forEach((value, i) => {
-    value.style.transform = `translate(-50%, ${
-      (-state.barsHeight[i] * barContainerHeight) / 100 - 0.5
-    }rem)`;
+  const calcValueTagsLocation = function (divider) {
+    const barContainerHeight = barContainerEl.clientHeight / divider; // in rem
+    values.forEach((value, i) => {
+      value.style.transform = `translate(-50%, ${
+        (-state.barsHeight[i] * barContainerHeight) / 100 - 0.5
+      }rem)`;
+    });
+  };
+
+  const observer = new ResizeObserver(entries => {
+    const observedHeight = entries[0].contentRect.height; // in px
+
+    if (observedHeight === 150.5) calcValueTagsLocation(10);
+    if (observedHeight === 165.8125) calcValueTagsLocation(10.9);
+    if (observedHeight === 154.75) calcValueTagsLocation(11.5);
+    if (observedHeight === 163.40625) calcValueTagsLocation(12.1);
   });
+  observer.observe(barContainerEl);
 };
 
 const createErrorMessage = function () {
@@ -98,10 +110,10 @@ const init = async function () {
     createBarsHeightArray(state.chartData);
 
     // Create bars' height animation
-    window.setTimeout(changeBarsHeightProperty, 200);
+    window.setTimeout(renderBars, 200);
 
     // Move bars' value tags to the top of bars
-    window.setTimeout(changeValueTagsLocation, 200);
+    window.setTimeout(moveValueTags, 200);
   } catch (err) {
     console.log(err);
     createErrorMessage();
