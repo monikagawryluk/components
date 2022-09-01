@@ -1,3 +1,16 @@
+:root {
+  --very-dark-desaturated-blue: hsl(238, 29%, 16%);
+  --soft-red: hsl(14, 88%, 65%);
+  --soft-red--transparent: hsla(14, 88%, 65%, 0.4);
+  --soft-violet: hsl(273, 75%, 66%);
+  --soft-blue: hsl(240, 73%, 65%);
+  --very-dark-grey: rgba(0, 0, 0, 0.3);
+  --very-dark-grayish-blue: hsl(237, 12%, 33%);
+  --dark-grayish-blue: hsl(240, 6%, 50%);
+  --light-grayish-blue: hsl(240, 5%, 91%);
+  --white: hsl(0, 0%, 100%);
+}
+
 * {
   padding: 0;
   margin: 0;
@@ -14,8 +27,8 @@ body {
   font-weight: 400;
   line-height: 1;
   letter-spacing: -0.2px;
-  color: hsl(238, 29%, 16%);
-  background-image: linear-gradient(hsl(273, 75%, 66%), hsl(240, 73%, 65%));
+  color: var(--very-dark-desaturated-blue);
+  background-image: linear-gradient(var(--soft-violet), var(--soft-blue));
   min-height: 100vh;
   padding: 0 2.5rem;
 
@@ -27,11 +40,11 @@ body {
 .faq-component {
   max-width: 33rem;
   width: 100%;
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--white);
   padding: 0 2.5rem 0;
   border-radius: 2.3rem;
   margin: 15rem 0 5rem;
-  box-shadow: 0 2.5rem 5rem rgba(0, 0, 0, 0.3);
+  box-shadow: 0 2.5rem 5rem var(--very-dark-grey);
 
   display: grid;
   grid-template-rows: 3rem auto;
@@ -80,7 +93,7 @@ body {
 }
 
 .question-box {
-  border-bottom: 1px solid hsl(240, 5%, 91%);
+  border-bottom: 1px solid var(--light-grayish-blue);
 
   display: grid;
   grid-template-columns: 1fr 3rem;
@@ -96,25 +109,26 @@ body {
 }
 
 .question:hover {
-  color: hsl(14, 88%, 65%);
+  color: var(--soft-red);
 }
 
 .question-selected {
   font-weight: 600;
-  color: hsl(238, 29%, 16%);
+  color: var(--very-dark-desaturated-blue);
 }
 
 .btn-arrow {
-  background-color: hsl(0, 0%, 100%);
+  background-color: var(--white);
   border: none;
   justify-self: end;
   cursor: pointer;
   border-radius: 0.2rem;
+  transition: transform 0.3s;
 }
 
 .btn-arrow:focus {
   outline: none;
-  box-shadow: 0 0 0 0.5rem hsla(14, 88%, 65%, 0.4);
+  box-shadow: 0 0 0 0.5rem var(--soft-red--transparent);
 }
 
 .btn-arrow:focus:not(:focus-visible) {
@@ -122,7 +136,7 @@ body {
 }
 
 .answer {
-  color: hsl(240, 6%, 50%);
+  color: var(--dark-grayish-blue);
   line-height: 1.5;
   margin-bottom: 1.5rem;
 }
